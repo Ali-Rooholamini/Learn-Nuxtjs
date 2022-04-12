@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1> Event Section </h1>
+        <h1> create an Events </h1>
     </div>
 </template>
 
@@ -9,12 +9,12 @@
   export default {
     head(){
       return {
-        title : "Event Section",
+        title : "Create an Event",
         meta : [
             {
             hid : "description",
             name : "description",
-            content : " Events page Description is Here "
+            content : " Create an Events page Description is Here "
             }
         ]
       }
