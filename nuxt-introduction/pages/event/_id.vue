@@ -3,17 +3,23 @@
 </template>
 
 <script>
-    import EventService from '../../services/EventService';
+    import { mapState } from 'vuex'
+
     export default {
-        async asyncData({ error , params }){
+        async fetch({ error , params , store }){
             try {
-                const { data } = await EventService.getEvent(params.id);
-                return {
-                    event : data
-                }
+                await store.dispatch("events/fetchEvent" , params.id)
             } catch(err) {
                 error({ statusCode: 503 , message: `we cant fetch user#${params.id} Data` })
             }
-        }
+        },
+
+        // mapState check before Fetch Hook and in first Try its Return Empty Array!!
+        computed : mapState({
+            event : state => state.events.event
+        })
+
     }
+
+
 </script>

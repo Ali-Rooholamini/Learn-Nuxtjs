@@ -1,32 +1,32 @@
 <template>
   <div>
-    <h1> Events </h1>
+    <h1> Event </h1>
     <EventCard v-for="(event , index) in events" :key="index" :event="event" :data-index="index"/>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import EventCard from '../components/EventCard.vue'
-  import EventService from '../services/EventService'
+
   export default {
-    async asyncData({ error }){
+    components : {
+      EventCard
+    },
+
+    async fetch({ store , error }){
       try {
-        const { data } = await EventService.getEvents();
-        return{
-          events : data
-        }
+            await store.dispatch('events/fetchEvents');
       } catch(err) {
         error({statusCode: 503 , message: "we cant fetch request to api. please try again later" })
       }
-
-      // session 6 - send request to api promise base with then
-      // return $axios.get("http://localhost:3000/events")
-      //   .then(res => { return { events : res.data } })
-      //   .catch(err => { error({ statusCode : 503 , message : "we cant fetch request to api. please try again later" }) });
     },
-    components : {
-      EventCard
+
+    // mapState check before Fetch Hook and in first Try its Return Empty Array!!
+    computed : mapState({
+      events : state => state.events.events
+    })
+
     }
-  }
 
 </script>
