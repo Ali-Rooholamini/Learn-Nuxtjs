@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const clientApi = axios.create({
-    baseURL : "http://localhost:3000/",
+    baseURL : "https://my-json-server.typicode.com/Code-Pop/real-world-nuxt/",
     withCredentials : false,
     headers : {
         "Content-Type" : "application/json"
